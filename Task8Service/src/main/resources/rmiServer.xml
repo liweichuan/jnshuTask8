@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="studentRMIServiceImpl" class="com.jnshu.serviceimpl.StudentServiceImpl"/>
+    <!--将student发布成一个RMI服务-->
+    <bean id="studentService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+      <!--RMI服务名  可自定义-->
+      <property name="serviceName" value="studentRMI"/>
+      <!--RMI服务具体实现类-->
+      <property name="service" ref="studentRMIServiceImpl"/>
+      <!--调用服务接口-->
+      <property name="serviceInterface" value="com.jnshu.service.StudentService"/>
+      <!--设置端口号-->
+      <property name="registryPort" value="1199"/>
+      <!-- 设置服务端口号 用来传输数据 这个参数是可选参数, 当不设置的时候, 数据传输会使用随机端口号 -->
+      <!--注意这里的ServicePort不配置的话, 会使用随机端口号, 后期上架到服务器没有办法设置开发的防火墙端口号.-->
+      <property name="servicePort" value="1199"/>
+    </bean>
+
+    <bean id="userRMIServiceImpl" class="com.jnshu.serviceimpl.UserServiceImpl"/>
+    <!--将user发布成一个RMI服务-->
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--RMI服务名  可自定义-->
+        <property name="serviceName" value="userRMI"/>
+        <!--RMI服务具体实现类-->
+        <property name="service" ref="userRMIServiceImpl"/>
+        <!--调用服务接口-->
+        <property name="serviceInterface" value="com.jnshu.service.UserService"/>
+        <!--设置端口号-->
+        <property name="registryPort" value="1199"/>
+        <property name="servicePort" value="1199"/>
+    </bean>
+    <bean id="mailRMIServiceImpl" class="com.jnshu.serviceimpl.MailServiceImpl"/>
+    <bean id="mailService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--RMI服务名  可自定义-->
+        <property name="serviceName" value="mailRMI"/>
+        <!--RMI服务具体实现类-->
+        <property name="service" ref="mailRMIServiceImpl"/>
+        <!--调用服务接口-->
+        <property name="serviceInterface" value="com.jnshu.service.MailService"/>
+        <!--设置端口号-->
+        <property name="registryPort" value="1199"/>
+        <property name="servicePort" value="1199"/>
+    </bean>
+    <bean id="messageRMIServiceImpl" class="com.jnshu.serviceimpl.MessageServiceImpl"/>
+    <bean id="messageService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--RMI服务名  可自定义-->
+        <property name="serviceName" value="messageRMI"/>
+        <!--RMI服务具体实现类-->
+        <property name="service" ref="messageRMIServiceImpl"/>
+        <!--调用服务接口-->
+        <property name="serviceInterface" value="com.jnshu.service.MessageService"/>
+        <!--设置端口号-->
+        <property name="registryPort" value="1199"/>
+        <property name="servicePort" value="1199"/>
+    </bean>
+    <bean id="redisRMIServiceImpl" class="com.jnshu.serviceimpl.RedisServiceImpl"/>
+    <bean id="redisService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--RMI服务名  可自定义-->
+        <property name="serviceName" value="redisRMI"/>
+        <!--RMI服务具体实现类-->
+        <property name="service" ref="redisRMIServiceImpl"/>
+        <!--调用服务接口-->
+        <property name="serviceInterface" value="com.jnshu.service.RedisService"/>
+        <!--设置端口号-->
+        <property name="registryPort" value="1199"/>
+        <property name="servicePort" value="1199"/>
+    </bean>
+    <bean id="uploadRMIServiceImpl" class="com.jnshu.serviceimpl.UploadServiceImpl"/>
+    <bean id="uploadService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--RMI服务名  可自定义-->
+        <property name="serviceName" value="uploadRMI"/>
+        <!--RMI服务具体实现类-->
+        <property name="service" ref="uploadRMIServiceImpl"/>
+        <!--调用服务接口-->
+        <property name="serviceInterface" value="com.jnshu.service.UploadService"/>
+        <!--设置端口号-->
+        <property name="registryPort" value="1199"/>
+        <property name="servicePort" value="1199"/>
+    </bean>
+</beans>

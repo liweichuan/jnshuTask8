@@ -1,0 +1,81 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.UserDao">
+    <insert id="addUser" parameterType="User">
+        insert into user(username,password,email,phone,picture,message,type,create_by,update_by,create_time,update_time)
+           values (#{username},
+                   #{password},
+                   #{email},
+                   #{phone},
+                   #{picture},
+                   #{message},
+                   #{type},
+                   #{create_by},
+                   #{update_by},
+                   #{create_time},
+                   #{update_time})
+    </insert>
+    <update id="updateUser" parameterType="User">
+        update user
+        <set>
+            <if test="username != null and username != ''">
+                username=#{username},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="email != null and email !=''">
+                email=#{email},
+            </if>
+            <if test="phone != null and phone !=''">
+                phone=#{phone},
+            </if>
+            <if test="picture != null and picture != ''">
+                picture=#{picture},
+            </if>
+            <if test="message != null and message !=''">
+                message=#{message},
+            </if>
+            <if test="type != null">
+                type=#{type},
+            </if>
+            <if test="create_by != null and create_by != ''">
+                create_by=#{create_by},
+            </if>
+            <if test="update_by != null and update_by != ''">
+                update_by=#{update_by},
+            </if>
+            <if test="create_time != null">
+                create_time=#{create_time},
+            </if>
+            <if test="update_time != null">
+                update_time=#{update_time}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="Long">
+        delete * from where id=#{id}
+    </delete>
+    <select id="findById" parameterType="Long" resultType="User">
+        select * from user where id=#{id}
+    </select>
+
+    <select id="findUserByName" parameterType="String" resultType="User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="findUserByLoginName" parameterType="String" resultType="User">
+        select * from user where username=#{loginname} or phone=#{loginname} or email=#{loginname}
+    </select>
+
+    <select id="findAll" resultType="User">
+        select * from user
+    </select>
+
+    <select id="findUserByPhone" parameterType="String" resultType="User">
+        select * from user where phone=#{phone}
+    </select>
+</mapper>

@@ -1,0 +1,88 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.StudentDao">
+    <insert id="addStudent" parameterType="Student">
+        insert into student(name,qq,type,start_time,graduation,student_id,link,wish,senior,status,create_by,update_by,create_time,update_time)
+        values (#{name},
+                #{qq},
+                #{type},
+                #{start_time},
+                #{graduation},
+                #{student_id},
+                #{link},
+                #{wish},
+                #{senior},
+                #{status},
+                #{create_by},
+                #{update_by},
+                #{create_time},
+                #{update_time})
+</insert>
+
+    <delete id="deleteStudentByName" parameterType="java.lang.String" >
+        delete from student where name=#{name}
+</delete>
+
+    <update id="updateStudentById" parameterType="Student" >
+        update student
+        <set>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="qq != null">
+                qq=#{qq},
+            </if>
+            <if test="type != null and type !=''">
+                type=#{type},
+            </if>
+            <if test="start_time != null">
+                start_time=#{start_time},
+            </if>
+            <if test="graduation != null and graduation !=''">
+                graduation=#{graduation},
+            </if>
+            <!--            <if test="student_id != null ">-->
+            <!--                student_id=#{student_id},-->
+            <!--            </if>-->
+            <if test="link != null and link != ''">
+                link=#{link},
+            </if>
+            <if test="wish != null and wish != ''">
+                wish=#{wish},
+            </if>
+            <if test="senior != null and senior != ''">
+                senior=#{senior},
+            </if>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="create_by != null and create_by != ''">
+                create_by=#{create_by},
+            </if>
+            <if test="update_by != null and update_by != ''">
+                update_by=#{update_by},
+            </if>
+            <if test="create_time != null">
+                create_time=#{create_time},
+            </if>
+            <if test="update_time != null">
+                update_time=#{update_time}
+            </if>
+        </set>
+        where student_id=#{student_id}
+    </update>
+
+    <select id="findStudentByName" parameterType="java.lang.String" resultType="Student">
+      select * from student where name=#{name}
+</select>
+
+    <select id="findStudentById" parameterType="Long" resultType="Student">
+      select * from student where student_id=#{student_id}
+</select>
+
+    <select id="findAll" resultType="Student">
+      select * from student
+</select>
+</mapper>
